@@ -1,5 +1,5 @@
-// import 'package:e_commerce_app/consts/app_colors.dart';
 import 'package:e_commerce_app/providers/theme_provider.dart';
+import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,15 +11,11 @@ class HomeScreen extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      // backgroundColor: AppColors.lightScaffoldColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Hello world",
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-            ),
+            const SubtitleTextWidget(label: "Hello"),
             ElevatedButton(onPressed: () {}, child: Text("Hello world")),
             SwitchListTile(
               title: Text(
