@@ -6,7 +6,7 @@ class ThemeProvider with ChangeNotifier {
   bool _darkTheme = false;
   bool get getIsDarkTheme => _darkTheme;
 
-  ThmeProvider() {
+  ThemeProvider() {
     getTheme();
   }
 
