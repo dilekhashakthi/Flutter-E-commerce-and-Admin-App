@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/providers/theme_provider.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
+import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(AssetsManager.shoppingCart),
         ),
-        title: Text("Profile Screen"),
+        title: AppNameTextWidget(),
       ),
       body: Column(
         children: [
