@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/cart/quantity_btm_sheet.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,22 @@ class CartWidget extends StatelessWidget {
                         ),
                         Spacer(),
                         OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                              backgroundColor: Theme.of(context)
+                                  .scaffoldBackgroundColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30),
+                                ),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return QuantityBottomSheetWidget();
+                              },
+                            );
+                          },
                           icon: Icon(IconlyLight.arrowDown2),
                           label: Text("QYt: 6"),
                           // style: OutlinedButton.styleFrom(
