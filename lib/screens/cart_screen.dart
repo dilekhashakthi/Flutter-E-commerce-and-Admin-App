@@ -1,4 +1,5 @@
-import 'package:e_commerce_app/widgests/title_text.dart';
+import 'package:e_commerce_app/services/assets_manager.dart';
+import 'package:e_commerce_app/widgests/empty_bag.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
@@ -6,10 +7,11 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: TitleTextWidget(label: "Cart Screen", fontSize: 30),
-      ),
-    );
+    return Scaffold(body: EmptyBagWidget(
+      imagePath: AssetsManager.shoppingBasket,
+      title: "Whoopds!",
+      subtitle: "Your cart is empty",
+      buttonText: "Looks like your cart is empty. Add something and make me happy!",
+    ));
   }
 }
