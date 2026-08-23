@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/cart/bottom_checkout.dart';
 import 'package:e_commerce_app/screens/cart/cart_widget.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
 import 'package:e_commerce_app/widgests/empty_bag.dart';
@@ -21,6 +22,7 @@ class CartScreen extends StatelessWidget {
             ),
           )
         : Scaffold(
+            bottomSheet: CartBottomSheetWidget(),
             appBar: AppBar(
               leading: Padding(
                 padding: const EdgeInsets.all(8.0),
