@@ -22,125 +22,130 @@ class ProfileScreen extends StatelessWidget {
         ),
         title: AppNameTextWidget(),
       ),
-      body: Column(
-        children: [
-          Visibility(
-            visible: false,
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: TitleTextWidget(
-                label: "Please login to have unlimited access",
-                fontSize: 20,
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Visibility(
+              visible: false,
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: TitleTextWidget(
+                  label: "Please login to have unlimited access",
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-          Visibility(
-            visible: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 5.0,
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).cardColor,
-                      border: Border.all(color: Colors.lightBlue, width: 3.0),
-                    ),
-                    child: ClipOval(
-                      child: Image.network(
-                        "https://i.pravatar.cc/150?img=12",
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Icon(
-                            Icons.person,
-                            size: 38,
-                            color: Theme.of(context).colorScheme.primary,
-                          );
-                        },
+            Visibility(
+              visible: true,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 5.0,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).cardColor,
+                        border: Border.all(color: Colors.lightBlue, width: 3.0),
+                      ),
+                      child: ClipOval(
+                        child: Image.network(
+                          "https://i.pravatar.cc/150?img=12",
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Icon(
+                              Icons.person,
+                              size: 38,
+                              color: Theme.of(context).colorScheme.primary,
+                            );
+                          },
+                        ),
                       ),
                     ),
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleTextWidget(label: "Dilekha Shakthi", fontSize: 18),
+                        SizedBox(height: 6),
+                        SubtitleTextWidget(label: "user@example.com"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Divider(thickness: 1),
+                  SizedBox(height: 10),
+                  TitleTextWidget(label: "General", fontSize: 18),
+                  SizedBox(height: 10),
+                  CustomListTile(
+                    text: "All Orders",
+                    imagePath: AssetsManager.orderSvg,
+                    function: () {},
                   ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitleTextWidget(label: "Dilekha Shakthi", fontSize: 18),
-                      SizedBox(height: 6),
-                      SubtitleTextWidget(label: "user@example.com"),
-                    ],
+                  CustomListTile(
+                    text: "Wishlist",
+                    imagePath: AssetsManager.wishlistSvg,
+                    function: () {},
+                  ),
+                  CustomListTile(
+                    text: "Viewed Recently",
+                    imagePath: AssetsManager.recent,
+                    function: () {},
+                  ),
+                  CustomListTile(
+                    text: "Address",
+                    imagePath: AssetsManager.address,
+                    function: () {},
+                  ),
+                  SizedBox(height: 10),
+                  Divider(thickness: 1),
+                  SizedBox(height: 10),
+                  TitleTextWidget(label: "Settings", fontSize: 18),
+                  SizedBox(height: 10),
+                  SwitchListTile(
+                    secondary: Image.asset(AssetsManager.theme, height: 34),
+                    title: Text(
+                      themeProvider.getIsDarkTheme
+                          ? "Dark Theme"
+                          : "Light Theme",
+                    ),
+                    value: themeProvider.getIsDarkTheme,
+                    onChanged: (value) {
+                      themeProvider.setDarkTheme(themeValue: value);
+                    },
                   ),
                 ],
               ),
             ),
-          ),
-          SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Divider(thickness: 1),
-                SizedBox(height: 10),
-                TitleTextWidget(label: "General", fontSize: 18),
-                SizedBox(height: 10),
-                CustomListTile(
-                  text: "All Orders",
-                  imagePath: AssetsManager.orderSvg,
-                  function: () {},
-                ),
-                CustomListTile(
-                  text: "Wishlist",
-                  imagePath: AssetsManager.wishlistSvg,
-                  function: () {},
-                ),
-                CustomListTile(
-                  text: "Viewed Recently",
-                  imagePath: AssetsManager.recent,
-                  function: () {},
-                ),
-                CustomListTile(
-                  text: "Address",
-                  imagePath: AssetsManager.address,
-                  function: () {},
-                ),
-                SizedBox(height: 10),
-                Divider(thickness: 1),
-                SizedBox(height: 10),
-                TitleTextWidget(label: "Settings", fontSize: 18),
-                SizedBox(height: 10),
-                SwitchListTile(
-                  secondary: Image.asset(AssetsManager.theme, height: 34),
-                  title: Text(
-                    themeProvider.getIsDarkTheme ? "Dark Theme" : "Light Theme",
+            Center(
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  value: themeProvider.getIsDarkTheme,
-                  onChanged: (value) {
-                    themeProvider.setDarkTheme(themeValue: value);
-                  },
                 ),
-              ],
-            ),
-          ),
-          Center(
-            child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
+                onPressed: () {},
+                icon: Icon(IconlyLight.login),
+                label: Text("Login"),
               ),
-              onPressed: () {},
-              icon: Icon(IconlyLight.login),
-              label: Text("Login"),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

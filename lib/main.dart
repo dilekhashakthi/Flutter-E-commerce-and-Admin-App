@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
               isDarkTheme: themeProvider.getIsDarkTheme,
               context: context,
             ),
+            debugShowCheckedModeBanner: false,
             home: const RootScreen(),
           );
         },
