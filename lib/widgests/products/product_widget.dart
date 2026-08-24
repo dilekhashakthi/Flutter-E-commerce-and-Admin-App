@@ -80,7 +80,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                         splashColor: Colors.red,
                         child: Padding(
                           padding: const EdgeInsets.all(6.0),
-                          child: Icon(Icons.add_shopping_cart_outlined),
+                          child: Icon(
+                            Icons.add_shopping_cart_outlined,
+                            size: 16,
+                          ),
                         ),
                       ),
                     ),
