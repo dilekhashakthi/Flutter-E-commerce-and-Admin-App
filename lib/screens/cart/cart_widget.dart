@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/screens/cart/quantity_btm_sheet.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
@@ -22,7 +23,7 @@ class CartWidget extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: FancyShimmerImage(
-                  imageUrl: "https://pngtree.com/so/shoes",
+                  imageUrl: AppConstants.imageUrl,
                   height: size.height * 0.2,
                   width: size.height * 0.2,
                 ),

@@ -1,8 +1,8 @@
-import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
-
 import 'package:e_commerce_app/services/assets_manager.dart';
+import 'package:e_commerce_app/widgests/products/product_widget.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
+import 'package:dynamic_height_list_view/dynamic_height_view.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -44,6 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              SizedBox(height: 15),
               TextField(
                 controller: searchTextController,
                 decoration: InputDecoration(
@@ -59,11 +60,24 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 onChanged: (value) {
-                  log("message");
+                  // log("message");
                 },
                 onSubmitted: (value) {
-                  log(searchTextController.text);
+                  // log(searchTextController.text);
                 },
+              ),
+              SizedBox(height: 15),
+              Expanded(
+                
+                child: DynamicHeightGridView(
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  builder: ((context, index) {
+                    return ProductWidget();
+                  }),
+                  itemCount: 200,
+                  crossAxisCount: 2,
+                ),
               ),
             ],
           ),

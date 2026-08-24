@@ -40,6 +40,7 @@ dependencies:
     path: packages/flutter_iconly
   shimmer: 3.0.0
   fancy_shimmer_image: ^2.0.2
+  dynamic_height_list_view: ^0.0.2
 
 dev_dependencies:
   flutter_test:
