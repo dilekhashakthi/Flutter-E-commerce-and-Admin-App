@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/consts/app_constants.dart';
+import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -20,8 +21,8 @@ class _ProductWidgetState extends State<ProductWidget> {
     return Padding(
       padding: const EdgeInsets.all(0.0),
       child: GestureDetector(
-        onTap: () {
-          // TODO
+        onTap: () async {
+          await Navigator.pushNamed(context, ProductDetailsScreen.routeName);
         },
         child: Column(
           children: [
