@@ -1,10 +1,10 @@
 import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
+import 'package:e_commerce_app/widgests/products/heart_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class ProductWidget extends StatefulWidget {
   const new({super.key});
@@ -49,10 +49,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   Flexible(
                     flex: 2,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(IconlyLight.heart),
-                    ),
+                    child: HeartButtonWidget()
                   ),
                 ],
               ),

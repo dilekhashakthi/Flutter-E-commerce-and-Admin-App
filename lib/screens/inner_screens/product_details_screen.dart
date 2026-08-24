@@ -1,10 +1,10 @@
 import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
+import 'package:e_commerce_app/widgests/products/heart_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = "/ProductDetailsScreen";
@@ -74,17 +74,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.blue.shade300,
-                            shape: BoxShape.circle,
-                          ),
-                          child: IconButton(
-                            style: IconButton.styleFrom(elevation: 10),
-                            onPressed: () {},
-                            icon: Icon(IconlyLight.heart),
-                          ),
-                        ),
+                        HeartButtonWidget(bgColor: Colors.blue.shade300,),
                         SizedBox(width: 20),
                         Expanded(
                           child: SizedBox(

@@ -1,9 +1,9 @@
 import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
+import 'package:e_commerce_app/widgests/products/heart_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class LatestArrivalProductsWidget extends StatelessWidget {
   const LatestArrivalProductsWidget({super.key});
@@ -47,10 +47,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     FittedBox(
                       child: Row(
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(IconlyLight.heart),
-                          ),
+                          HeartButtonWidget(),
                           IconButton(
                             onPressed: () {},
                             icon: Icon(Icons.add_shopping_cart),
