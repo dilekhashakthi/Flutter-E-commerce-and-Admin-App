@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/providers/theme_provider.dart';
+import 'package:e_commerce_app/screens/auth/login.dart';
+import 'package:e_commerce_app/screens/inner_screens/orders/orders_screen.dart';
 import 'package:e_commerce_app/screens/inner_screens/viewed_recently.dart';
 import 'package:e_commerce_app/screens/inner_screens/wishlist.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
@@ -96,7 +98,10 @@ class ProfileScreen extends StatelessWidget {
                   CustomListTile(
                     text: "All Orders",
                     imagePath: AssetsManager.orderSvg,
-                    function: () {},
+                    function: () {
+                      Navigator.of(context)
+                          .pushNamed(OrdersScreenFree.routeName);
+                    },
                   ),
                   CustomListTile(
                     text: "Wishlist",
@@ -152,12 +157,13 @@ class ProfileScreen extends StatelessWidget {
                 icon: Icon(IconlyLight.login),
                 label: Text("Login"),
                 onPressed: () async {
-                  await MyAppFunction.showErrorOrWarningDialog(
-                    context: context,
-                    subtitle: "Are you sure you want to signot?",
-                    fct: () {},
-                    isError: false,
-                  );
+                  Navigator.pushNamed(context, LoginScreen.routeName);
+                  // await MyAppFunction.showErrorOrWarningDialog(
+                  //   context: context,
+                  //   subtitle: "Are you sure you want to signot?",
+                  //   fct: () {},
+                  //   isError: false,
+                  // );
                 },
               ),
             ),

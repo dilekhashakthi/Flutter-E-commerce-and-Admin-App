@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/consts/validator.dart';
+import 'package:e_commerce_app/root_screen.dart';
+import 'package:e_commerce_app/screens/auth/forgot_password.dart';
 import 'package:e_commerce_app/screens/auth/register.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/auth/google_btn.dart';
@@ -131,12 +133,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
                           child: SubtitleTextWidget(
                             label: "Forgot password ?",
                             fontStyle: FontStyle.italic,
                             textDecoration: TextDecoration.underline,
                           ),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(ForgotPasswordScreen.routeName);
+                          },
                         ),
                       ),
                       SizedBox(height: 16),
@@ -199,7 +204,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       fontSize: 18,
                                     ),
                                   ),
-                                  onPressed: () async {},
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed(RootScreen.routeName);
+                                  },
                                 ),
                               ),
                             ),

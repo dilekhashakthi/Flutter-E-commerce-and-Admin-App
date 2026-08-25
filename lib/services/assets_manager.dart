@@ -6,7 +6,7 @@ class AssetsManager {
   static String categoryImagePath = "assets/images/categories";
 
   // General Images
-  static String forgetPassword = "$imagePath/forget_password.png";
+  static String forgotPassword = "$imagePath/forgot_password.jpg";
   static String mapRounded = "$imagePath/rounded_map.png";
   static String warning = "$imagePath/warning.png";
   static String error = "$imagePath/error.png";
