@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/consts/theme_data.dart';
 import 'package:e_commerce_app/providers/theme_provider.dart';
 import 'package:e_commerce_app/root_screen.dart';
+import 'package:e_commerce_app/screens/auth/login.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
 import 'package:e_commerce_app/screens/inner_screens/viewed_recently.dart';
 import 'package:e_commerce_app/screens/inner_screens/wishlist.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
               context: context,
             ),
             debugShowCheckedModeBanner: false,
-            home: const RootScreen(),
+            // home: const RootScreen(),
+            home: const LoginScreen(),
             routes: {
               ProductDetailsScreen.routeName: (context) =>
                   const ProductDetailsScreen(),
