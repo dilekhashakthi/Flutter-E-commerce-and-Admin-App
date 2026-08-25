@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/consts/validator.dart';
+import 'package:e_commerce_app/screens/auth/image_picker_widget.dart';
 import 'package:e_commerce_app/screens/auth/login.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/auth/google_btn.dart';
@@ -6,6 +7,7 @@ import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = "/RegisterScreen";
@@ -30,6 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _repeatPasswordFocusNode;
 
   final _formKey = GlobalKey<FormState>();
+  XFile? _pickedImage;
 
   @override
   void initState() {
@@ -70,6 +73,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -96,6 +101,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                 ),
+                SizedBox(height: 16),
+                SizedBox(
+                  height: size.width * 0.3,
+                  width: size.width * 0.3,
+                  child: PickImageWidget(
+                    pickedImage: _pickedImage,
+                    function: () {
+                      
+                    },
+                  )),
                 SizedBox(height: 16),
                 Form(
                   key: _formKey,
