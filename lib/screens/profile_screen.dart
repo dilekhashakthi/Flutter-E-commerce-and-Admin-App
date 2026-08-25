@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/providers/theme_provider.dart';
+import 'package:e_commerce_app/screens/inner_screens/viewed_recently.dart';
+import 'package:e_commerce_app/screens/inner_screens/wishlist.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
@@ -98,12 +100,19 @@ class ProfileScreen extends StatelessWidget {
                   CustomListTile(
                     text: "Wishlist",
                     imagePath: AssetsManager.wishlistSvg,
-                    function: () {},
+                    function: () {
+                      Navigator.pushNamed(context, WishlistScreen.routeName);
+                    },
                   ),
                   CustomListTile(
                     text: "Viewed Recently",
                     imagePath: AssetsManager.recent,
-                    function: () {},
+                    function: () {
+                      Navigator.pushNamed(
+                        context,
+                        ViewedRecentlyScreen.routeName,
+                      );
+                    },
                   ),
                   CustomListTile(
                     text: "Address",
