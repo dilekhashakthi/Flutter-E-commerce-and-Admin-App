@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/consts/validator.dart';
-import 'package:e_commerce_app/screens/auth/register.dart';
+import 'package:e_commerce_app/screens/auth/login.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/auth/google_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
@@ -7,50 +7,63 @@ import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const routeName = "/LoginScreen";
-  const new({super.key});
+class RegisterScreen extends StatefulWidget {
+  static const routeName = "/RegisterScreen";
+
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool obscureText = true;
 
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
+  late final TextEditingController _nameController,
+      _emailController,
+      _passwordController,
+      _repeatPasswordController;
 
-  late final FocusNode _emailFocusNode;
-  late final FocusNode _passwordFocusNode;
+  late final FocusNode _nameFocusNode,
+      _emailFocusNode,
+      _passwordFocusNode,
+      _repeatPasswordFocusNode;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _repeatPasswordController = TextEditingController();
 
     // Focus Node
+    _nameFocusNode = FocusNode();
     _emailFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
+    _repeatPasswordFocusNode = FocusNode();
     super.initState();
   }
 
   @override
   void dispose() {
     if (mounted) {
+      _nameController.dispose();
       _emailController.dispose();
       _passwordController.dispose();
+      _repeatPasswordController.dispose();
 
       // Focus Node
+      _nameFocusNode.dispose();
       _emailFocusNode.dispose();
       _passwordFocusNode.dispose();
+      _repeatPasswordFocusNode.dispose();
     }
     super.dispose();
   }
 
-  Future<void> _loginFct() async {
+  Future<void> _registerFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
   }
@@ -67,12 +80,21 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 60),
+                SizedBox(height: 18),
                 AppNameTextWidget(),
                 SizedBox(height: 16),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: TitleTextWidget(label: "Welcome back!", fontSize: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TitleTextWidget(label: "Welcome back!", fontSize: 20),
+                      SubtitleTextWidget(
+                        label: "Sign up now to receive special offers and updates from our app",
+                        fontSize: 12,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 16),
                 Form(
@@ -80,6 +102,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      TextFormField(
+                        controller: _nameController,
+                        focusNode: _nameFocusNode,
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          hintText: "Your Name",
+                          prefixIcon: Icon(Icons.person),
+                        ),
+                        onFieldSubmitted: (value) {
+                          FocusScope.of(context).requestFocus(_emailFocusNode);
+                        },
+                        validator: (value) {
+                          return Validators.displayNamevalidator(value);
+                        },
+                      ),
+                      SizedBox(height: 16),
                       TextFormField(
                         controller: _emailController,
                         focusNode: _emailFocusNode,
@@ -101,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         controller: _passwordController,
                         focusNode: _passwordFocusNode,
-                        textInputAction: TextInputAction.done,
+                        textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: obscureText,
                         decoration: InputDecoration(
@@ -120,26 +159,48 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        onFieldSubmitted: (value) async {
-                          await _loginFct();
+                        onFieldSubmitted: (value) {
+                          FocusScope.of(context)
+                              .requestFocus(_repeatPasswordFocusNode);
                         },
                         validator: (value) {
                           return Validators.passwordValidator(value);
                         },
                       ),
                       SizedBox(height: 16),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: SubtitleTextWidget(
-                            label: "Forgot password ?",
-                            fontStyle: FontStyle.italic,
-                            textDecoration: TextDecoration.underline,
+                      TextFormField(
+                        controller: _repeatPasswordController,
+                        focusNode: _repeatPasswordFocusNode,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: obscureText,
+                        decoration: InputDecoration(
+                          hintText: "Confirm Password",
+                          prefixIcon: Icon(IconlyLight.lock),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
+                            icon: Icon(
+                              obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
                           ),
                         ),
+                        onFieldSubmitted: (value) async {
+                          await _registerFct();
+                        },
+                        validator: (value) {
+                          return Validators.repeatPasswordValidator(
+                            value: value,
+                            password: _passwordController.text,
+                          );
+                        },
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: 40),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
@@ -151,20 +212,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          icon: Icon(IconlyLight.login),
-                          label: Text("Login"),
+                          icon: Icon(IconlyLight.addUser),
+                          label: Text("Register"),
                           onPressed: () async {
-                            await _loginFct();
+                            await _registerFct();
                           },
                         ),
                       ),
                       SizedBox(height: 30),
                       SubtitleTextWidget(
                         label: "Or connect using".toUpperCase(),
+                        fontSize: 16,
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 15),
                       SizedBox(
-                        height: kBottomNavigationBarHeight + 10,
+                        height: kBottomNavigationBarHeight - 10,
                         child: Row(
                           children: [
                             Expanded(
@@ -173,33 +235,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: kBottomNavigationBarHeight,
                                 child: FittedBox(
                                   child: GoogleButton(
-                                    label: "Sign in with Google",
+                                    label: "Sign up with Google",
                                   ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 8),
-                            Expanded(
-                              child: SizedBox(
-                                height: kBottomNavigationBarHeight,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 3,
-                                    padding: EdgeInsets.all(18),
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Guest?",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  onPressed: () async {},
                                 ),
                               ),
                             ),
@@ -210,17 +247,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SubtitleTextWidget(label: "Don't have an account?"),
+                          SubtitleTextWidget(label: "Do you have an account?"),
                           TextButton(
-                            child: SubtitleTextWidget(
-                              label: "SignUp",
-                              fontStyle: FontStyle.italic,
-                              textDecoration: TextDecoration.underline,
-                            ),
                             onPressed: () {
                               Navigator.of(context)
-                                  .pushNamed(RegisterScreen.routeName);
+                                  .pushNamed(LoginScreen.routeName);
                             },
+                            child: SubtitleTextWidget(
+                              label: "SignIn",
+                              fontWeight: FontWeight.bold,
+                              textDecoration: TextDecoration.underline,
+                            ),
                           ),
                         ],
                       ),
