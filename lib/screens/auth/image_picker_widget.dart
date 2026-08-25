@@ -40,7 +40,9 @@ class PickImageWidget extends StatelessWidget {
             color: Colors.lightBlue,
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () {},
+              onTap: () {
+                function();
+              },
               splashColor: Colors.red,
               child: Padding(
                 padding: EdgeInsets.all(6.0),

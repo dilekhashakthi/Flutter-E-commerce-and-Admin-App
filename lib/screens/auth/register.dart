@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/consts/validator.dart';
 import 'package:e_commerce_app/screens/auth/image_picker_widget.dart';
 import 'package:e_commerce_app/screens/auth/login.dart';
+import 'package:e_commerce_app/services/my_app_function.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/auth/google_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
@@ -71,6 +72,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
     FocusScope.of(context).unfocus();
   }
 
+  Future<void> localImagePicker() async {
+    final ImagePicker imagePicker = ImagePicker();
+    await MyAppFunction.imagePickerDialog(
+      context: context,
+      cameraFct: () async {
+        _pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+        setState(() {});
+      },
+      galleryFct: () async {
+        _pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+        setState(() {});
+      },
+      removeFct: () {
+        setState(() {
+          _pickedImage = null;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -107,10 +128,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: size.width * 0.3,
                   child: PickImageWidget(
                     pickedImage: _pickedImage,
-                    function: () {
-                      
+                    function: () async {
+                      await localImagePicker();
                     },
-                  )),
+                  ),
+                ),
                 SizedBox(height: 16),
                 Form(
                   key: _formKey,
