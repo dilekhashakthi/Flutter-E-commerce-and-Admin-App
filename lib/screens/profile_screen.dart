@@ -2,6 +2,7 @@ import 'package:e_commerce_app/providers/theme_provider.dart';
 import 'package:e_commerce_app/screens/inner_screens/viewed_recently.dart';
 import 'package:e_commerce_app/screens/inner_screens/wishlist.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
+import 'package:e_commerce_app/services/my_app_function.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
@@ -148,9 +149,16 @@ class ProfileScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                onPressed: () {},
                 icon: Icon(IconlyLight.login),
                 label: Text("Login"),
+                onPressed: () async {
+                  await MyAppFunction.showErrorOrWarningDialog(
+                    context: context,
+                    subtitle: "Are you sure you want to signot?",
+                    fct: () {},
+                    isError: false,
+                  );
+                },
               ),
             ),
           ],
