@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/models/cart_model.dart';
+import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/screens/cart/quantity_btm_sheet.dart';
 import 'package:e_commerce_app/widgests/products/heart_btn.dart';
@@ -17,6 +18,7 @@ class CartWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     final cartModel = Provider.of<CartModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     final productsProvider = Provider.of<ProductProvider>(context);
     final getCurrProduct = productsProvider.findByProdId(cartModel.productID);
@@ -55,8 +57,12 @@ class CartWidget extends StatelessWidget {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
                                     icon: Icon(Icons.clear, color: Colors.red),
+                                    onPressed: () {
+                                      cartProvider.removeOneItem(
+                                        productID: getCurrProduct.productID,
+                                      );
+                                    },
                                   ),
                                   HeartButtonWidget(),
                                 ],

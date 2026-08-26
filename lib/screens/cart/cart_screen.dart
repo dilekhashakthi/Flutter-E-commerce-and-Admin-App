@@ -1,8 +1,8 @@
 import 'package:e_commerce_app/providers/cart_provider.dart';
-import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/screens/cart/bottom_checkout.dart';
 import 'package:e_commerce_app/screens/cart/cart_widget.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
+import 'package:e_commerce_app/services/my_app_function.dart';
 import 'package:e_commerce_app/widgests/empty_bag.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +40,17 @@ class CartScreen extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    // Handle delete action
-                  },
                   icon: Icon(IconlyLight.delete, color: Colors.red),
+                  onPressed: () {
+                    MyAppFunction.showErrorOrWarningDialog(
+                      isError: false,
+                      context: context,
+                      subtitle: "Clear cart?",
+                      fct: () {
+                        cartProvider.clearLocalCart();
+                      },
+                    );
+                  },
                 ),
               ],
             ),
