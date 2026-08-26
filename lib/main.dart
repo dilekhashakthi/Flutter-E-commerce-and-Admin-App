@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/consts/theme_data.dart';
+import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/providers/theme_provider.dart';
 import 'package:e_commerce_app/root_screen.dart';
@@ -35,6 +36,11 @@ class MyApp extends StatelessWidget {
             return ProductProvider();
           },
         ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return CartProvider();
+          },
+        ),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -59,8 +65,7 @@ class MyApp extends StatelessWidget {
               OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
               ForgotPasswordScreen.routeName: (context) =>
                   const ForgotPasswordScreen(),
-              SearchScreen.routeName: (context) =>
-                  const SearchScreen(),
+              SearchScreen.routeName: (context) => const SearchScreen(),
             },
           );
         },

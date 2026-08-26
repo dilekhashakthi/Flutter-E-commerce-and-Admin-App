@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/products/heart_btn.dart';
@@ -22,6 +23,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     Size size = MediaQuery.of(context).size;
 
     final productsProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     String? productID = ModalRoute.of(context)!.settings.arguments as String?;
     final getCurrProduct = productsProvider.findByProdId(productID!);
@@ -95,9 +97,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                     ),
-                                    onPressed: () {},
-                                    icon: Icon(Icons.add_shopping_cart),
-                                    label: Text("Add to cart"),
+                                    icon: Icon(
+                                      cartProvider.isProdInCart(
+                                            productID: getCurrProduct.productID,
+                                          )
+                                          ? Icons.check
+                                          : Icons.add_shopping_cart_outlined,
+                                    ),
+                                    label: Text(
+                                      cartProvider.isProdInCart(
+                                            productID: getCurrProduct.productID,
+                                          )
+                                          ? "In cart"
+                                          : "Add to cart",
+                                    ),
+                                    onPressed: () {
+                                      if (cartProvider.isProdInCart(
+                                        productID: getCurrProduct.productID,
+                                      )) {
+                                        return;
+                                      }
+                                      cartProvider.addProductToCart(
+                                        productID: getCurrProduct.productID,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),

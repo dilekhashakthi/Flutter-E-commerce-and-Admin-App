@@ -88,6 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         setState(() {
                           ProductListSeaerch = productsProvider.searchQuery(
                             searchText: searchTextController.text,
+                            passedList: productList
                           );
                         });
                       },
@@ -95,6 +96,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         setState(() {
                           ProductListSeaerch = productsProvider.searchQuery(
                             searchText: searchTextController.text,
+                            passedList: productList
                           );
                         });
                       },

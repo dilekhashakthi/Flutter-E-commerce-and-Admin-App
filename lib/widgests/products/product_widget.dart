@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
 import 'package:e_commerce_app/widgests/products/heart_btn.dart';
@@ -19,6 +20,8 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+
     final getCurrProduct = productsProvider.findByProdId(widget.productID);
 
     Size size = MediaQuery.of(context).size;
@@ -82,13 +85,27 @@ class _ProductWidgetState extends State<ProductWidget> {
                             color: Colors.lightBlue,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(12),
-                              onTap: () {},
+                              onTap: () {
+                                if (cartProvider.isProdInCart(
+                                  productID: getCurrProduct.productID,
+                                )) {
+                                  return;
+                                }
+                                cartProvider.addProductToCart(
+                                  productID: getCurrProduct.productID,
+                                );
+                              },
                               splashColor: Colors.red,
                               child: Padding(
                                 padding: const EdgeInsets.all(6.0),
                                 child: Icon(
-                                  Icons.add_shopping_cart_outlined,
+                                  cartProvider.isProdInCart(
+                                        productID: getCurrProduct.productID,
+                                      )
+                                      ? Icons.check
+                                      : Icons.add_shopping_cart_outlined,
                                   size: 16,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
