@@ -2,6 +2,7 @@ import 'package:e_commerce_app/consts/theme_data.dart';
 import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/providers/theme_provider.dart';
+import 'package:e_commerce_app/providers/wishlist_provider.dart';
 import 'package:e_commerce_app/root_screen.dart';
 import 'package:e_commerce_app/screens/auth/forgot_password.dart';
 import 'package:e_commerce_app/screens/auth/login.dart';
@@ -39,6 +40,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) {
             return CartProvider();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return WishlistProvider();
           },
         ),
       ],

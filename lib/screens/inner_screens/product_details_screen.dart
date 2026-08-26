@@ -84,7 +84,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              HeartButtonWidget(bgColor: Colors.blue.shade300),
+                              HeartButtonWidget(
+                                productID: getCurrProduct.productID,
+                                bgColor: Colors.blue.shade300,
+                              ),
                               SizedBox(width: 20),
                               Expanded(
                                 child: SizedBox(

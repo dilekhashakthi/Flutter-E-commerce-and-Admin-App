@@ -61,7 +61,9 @@ class _ProductWidgetState extends State<ProductWidget> {
                             maxLine: 2,
                           ),
                         ),
-                        Flexible(flex: 2, child: HeartButtonWidget()),
+                        Flexible(flex: 2, child: HeartButtonWidget(
+                            productID: getCurrProduct.productID,
+                          ),),
                       ],
                     ),
                   ),

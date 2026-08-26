@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/models/product_model.dart';
 import 'package:e_commerce_app/providers/cart_provider.dart';
+import 'package:e_commerce_app/providers/wishlist_provider.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
 import 'package:e_commerce_app/widgests/products/heart_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
@@ -17,6 +18,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
 
     final productsModel = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -57,7 +59,9 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     FittedBox(
                       child: Row(
                         children: [
-                          HeartButtonWidget(),
+                          HeartButtonWidget(
+                            productID: productsModel.productID,
+                          ),
                           IconButton(
                             icon: Icon(
                               cartProvider.isProdInCart(
