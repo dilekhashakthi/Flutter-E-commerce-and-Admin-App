@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
+import 'package:e_commerce_app/providers/viewd_recenly_provider.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
 import 'package:e_commerce_app/widgests/products/heart_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
@@ -21,6 +22,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewdRecenlyProvider = Provider.of<ViewdRecenlyProvider>(context);
 
     final getCurrProduct = productsProvider.findByProdId(widget.productID);
 
@@ -32,6 +34,9 @@ class _ProductWidgetState extends State<ProductWidget> {
             padding: const EdgeInsets.all(0.0),
             child: GestureDetector(
               onTap: () async {
+                viewdRecenlyProvider.addViewdRecenly(
+                  productID: getCurrProduct.productID,
+                );
                 await Navigator.pushNamed(
                   context,
                   ProductDetailsScreen.routeName,
@@ -61,9 +66,12 @@ class _ProductWidgetState extends State<ProductWidget> {
                             maxLine: 2,
                           ),
                         ),
-                        Flexible(flex: 2, child: HeartButtonWidget(
+                        Flexible(
+                          flex: 2,
+                          child: HeartButtonWidget(
                             productID: getCurrProduct.productID,
-                          ),),
+                          ),
+                        ),
                       ],
                     ),
                   ),

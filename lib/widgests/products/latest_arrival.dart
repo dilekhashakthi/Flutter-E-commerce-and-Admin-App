@@ -1,6 +1,6 @@
-import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/models/product_model.dart';
 import 'package:e_commerce_app/providers/cart_provider.dart';
+import 'package:e_commerce_app/providers/viewd_recenly_provider.dart';
 import 'package:e_commerce_app/providers/wishlist_provider.dart';
 import 'package:e_commerce_app/screens/inner_screens/product_details_screen.dart';
 import 'package:e_commerce_app/widgests/products/heart_btn.dart';
@@ -18,12 +18,15 @@ class LatestArrivalProductsWidget extends StatelessWidget {
 
     final productsModel = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
-    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    final viewdRecenlyProvider = Provider.of<ViewdRecenlyProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
+          viewdRecenlyProvider.addViewdRecenly(
+            productID: productsModel.productID,
+          );
           await Navigator.pushNamed(
             context,
             ProductDetailsScreen.routeName,
@@ -59,9 +62,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     FittedBox(
                       child: Row(
                         children: [
-                          HeartButtonWidget(
-                            productID: productsModel.productID,
-                          ),
+                          HeartButtonWidget(productID: productsModel.productID),
                           IconButton(
                             icon: Icon(
                               cartProvider.isProdInCart(
