@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/consts/app_constants.dart';
 import 'package:e_commerce_app/models/cart_model.dart';
 import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/screens/cart/quantity_btm_sheet.dart';
@@ -85,7 +84,9 @@ class CartWidget extends StatelessWidget {
                                     ),
                                     context: context,
                                     builder: (context) {
-                                      return QuantityBottomSheetWidget();
+                                      return QuantityBottomSheetWidget(
+                                        cartModel: cartModel,
+                                      );
                                     },
                                   );
                                 },
