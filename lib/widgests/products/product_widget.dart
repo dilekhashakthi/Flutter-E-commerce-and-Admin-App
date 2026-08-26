@@ -32,6 +32,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 await Navigator.pushNamed(
                   context,
                   ProductDetailsScreen.routeName,
+                  arguments: getCurrProduct.productID,
                 );
               },
               child: Column(
