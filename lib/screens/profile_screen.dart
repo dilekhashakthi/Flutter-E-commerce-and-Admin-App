@@ -4,7 +4,6 @@ import 'package:e_commerce_app/screens/inner_screens/orders/orders_screen.dart';
 import 'package:e_commerce_app/screens/inner_screens/viewed_recently.dart';
 import 'package:e_commerce_app/screens/inner_screens/wishlist.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
-import 'package:e_commerce_app/services/my_app_function.dart';
 import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';

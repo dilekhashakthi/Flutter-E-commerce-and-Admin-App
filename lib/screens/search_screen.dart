@@ -1,8 +1,10 @@
+import 'package:e_commerce_app/providers/product_provider.dart';
 import 'package:e_commerce_app/services/assets_manager.dart';
 import 'package:e_commerce_app/widgests/products/product_widget.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_height_list_view/dynamic_height_view.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -28,6 +30,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductProvider>(context);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -52,8 +56,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       // setState(() {
-                        FocusScope.of(context).unfocus();
-                        searchTextController.clear();
+                      FocusScope.of(context).unfocus();
+                      searchTextController.clear();
                       // });
                     },
                     child: Icon(Icons.clear, color: Colors.red),
@@ -68,15 +72,17 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               SizedBox(height: 15),
               Expanded(
-                
                 child: DynamicHeightGridView(
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  builder: ((context, index) {
-                    return ProductWidget();
-                  }),
-                  itemCount: 200,
+                  itemCount: productsProvider.getProducts.length,
                   crossAxisCount: 2,
+                  builder: ((context, index) {
+                    return ProductWidget(
+                      productID:
+                          productsProvider.getProducts[index].productID,
+                    );
+                  }),
                 ),
               ),
             ],
