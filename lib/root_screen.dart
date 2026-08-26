@@ -1,9 +1,11 @@
+import 'package:e_commerce_app/providers/cart_provider.dart';
 import 'package:e_commerce_app/screens/cart/cart_screen.dart';
 import 'package:e_commerce_app/screens/home_screen.dart';
 import 'package:e_commerce_app/screens/profile_screen.dart';
 import 'package:e_commerce_app/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 class RootScreen extends StatefulWidget {
   static const routeName = "/RootScreen";
@@ -34,6 +36,8 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
@@ -63,7 +67,10 @@ class _RootScreenState extends State<RootScreen> {
             label: "Search",
           ),
           NavigationDestination(
-            icon: Badge(label: Text("5"), child: Icon(IconlyLight.bag2)),
+            icon: Badge(
+              label: Text(cartProvider.getCartItems.length.toString()),
+              child: Icon(IconlyLight.bag2),
+            ),
             selectedIcon: Icon(IconlyBold.bag2),
             label: "Cart",
           ),
