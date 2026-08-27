@@ -1,3 +1,4 @@
+import 'package:aa/screens/edit_upload_product_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,26 +21,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) {
-          return ThemeProvider();
-        }),
-        ChangeNotifierProvider(create: (_) {
-          return ProductsProvider();
-        }),
-      ],
-      child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Shop Smart ADMIN EN',
-          theme: Styles.themeData(
-              isDarkTheme: themeProvider.getIsDarkTheme, context: context),
-          home: const DashboardScreen(),
-          routes: {
-            OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
-            SearchScreen.routeName: (context) => const SearchScreen(),
+        ChangeNotifierProvider(
+          create: (_) {
+            return ThemeProvider();
           },
-        );
-      }),
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return ProductsProvider();
+          },
+        ),
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Shop Smart ADMIN EN',
+            theme: Styles.themeData(
+              isDarkTheme: themeProvider.getIsDarkTheme,
+              context: context,
+            ),
+            home: const DashboardScreen(),
+            routes: {
+              OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
+              SearchScreen.routeName: (context) => const SearchScreen(),
+              EditOrUploadProductScreen.routeName: (context) =>
+                  const EditOrUploadProductScreen(),
+            },
+          );
+        },
+      ),
     );
   }
 }

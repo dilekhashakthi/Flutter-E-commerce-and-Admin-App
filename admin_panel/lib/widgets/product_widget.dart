@@ -1,16 +1,14 @@
+import 'package:aa/screens/edit_upload_product_form.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 import '../providers/products_provider.dart';
 import 'subtitle_text.dart';
 import 'title_text.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({
-    super.key,
-    required this.productId,
-  });
+  const ProductWidget({super.key, required this.productId});
   final String productId;
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -29,7 +27,18 @@ class _ProductWidgetState extends State<ProductWidget> {
         : Padding(
             padding: const EdgeInsets.all(0.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return EditOrUploadProductScreen(
+                        productModel: getCurrProduct,
+                      );
+                    },
+                  ),
+                );
+              },
               child: Column(
                 children: [
                   ClipRRect(
@@ -40,9 +49,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       width: double.infinity,
                     ),
                   ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
+                  const SizedBox(height: 12.0),
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: TitlesTextWidget(
@@ -51,9 +58,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       maxLines: 2,
                     ),
                   ),
-                  const SizedBox(
-                    height: 6.0,
-                  ),
+                  const SizedBox(height: 6.0),
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: SubtitleTextWidget(
@@ -62,9 +67,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
+                  const SizedBox(height: 12.0),
                 ],
               ),
             ),
