@@ -1,5 +1,8 @@
+import 'package:aa/models/dashboard_btns_model.dart';
+import 'package:aa/widgets/dashboard_btns.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/title_text.dart';
@@ -16,6 +19,7 @@ class DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const TitlesTextWidget(label: "Dashboard Screen"),
@@ -27,16 +31,29 @@ class DashboardScreenState extends State<DashboardScreen> {
           IconButton(
             onPressed: () {
               themeProvider.setDarkTheme(
-                  themeValue: !themeProvider.getIsDarkTheme);
+                themeValue: !themeProvider.getIsDarkTheme,
+              );
             },
-            icon: Icon(themeProvider.getIsDarkTheme
-                ? Icons.light_mode
-                : Icons.dark_mode),
+            icon: Icon(
+              themeProvider.getIsDarkTheme ? Icons.light_mode : Icons.dark_mode,
+            ),
           ),
         ],
       ),
-      body: const Center(
-        child: TitlesTextWidget(label: "Dashboard Screen "),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: List.generate(
+          DashboardButtonsModel.dashboartBtnList(context).length,
+          (index) => DashboardButtonsWidget(
+            imagePath: DashboardButtonsModel.dashboartBtnList(
+              context,
+            )[index].imagePath,
+            text: DashboardButtonsModel.dashboartBtnList(context)[index].text,
+            onPressed: DashboardButtonsModel.dashboartBtnList(
+              context,
+            )[index].onPressed,
+          ),
+        ),
       ),
     );
   }

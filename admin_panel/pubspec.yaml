@@ -42,7 +42,7 @@ dev_dependencies:
   # Memory
   shared_preferences: ^2.1.0
   # State management
-  provider: ^6.0.5
+  provider: ^6.1.5+1
   # Icons
   flutter_iconly: ^1.0.2
   ionicons: ^0.2.2
