@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/consts/validator.dart';
+import 'package:e_commerce_app/root_screen.dart';
 import 'package:e_commerce_app/screens/auth/image_picker_widget.dart';
 import 'package:e_commerce_app/screens/auth/login.dart';
 import 'package:e_commerce_app/services/my_app_function.dart';
@@ -6,8 +7,10 @@ import 'package:e_commerce_app/widgests/app_name_text.dart';
 import 'package:e_commerce_app/widgests/auth/google_btn.dart';
 import 'package:e_commerce_app/widgests/subtitle_text.dart';
 import 'package:e_commerce_app/widgests/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -34,6 +37,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _formKey = GlobalKey<FormState>();
   XFile? _pickedImage;
+
+  bool _isLoading = false;
+
+  final auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -70,6 +77,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+
+        await auth.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Fluttertoast.showToast(
+          msg: "An account has been created",
+          textColor: Colors.white,
+        );
+
+        if (!mounted) return;
+
+        Navigator.pushReplacementNamed(context, RootScreen.routeName);
+      } on FirebaseException catch (error) {
+        MyAppFunction.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.message.toString(),
+          fct: () {},
+        );
+      } catch (error) {
+        MyAppFunction.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.toString(),
+          fct: () {},
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   Future<void> localImagePicker() async {
